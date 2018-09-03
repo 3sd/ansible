@@ -1,3 +1,5 @@
+- name: get installed packages
+  package_facts:
 - name: install packages from debian repos
   apt:
     name:
@@ -61,6 +63,7 @@
   apt:
     deb: "https://repo.skype.com/latest/skypeforlinux-64.deb"
   become: true
+  when: ansible_facts.packages.skypeforlinux is not defined
 - name: get latest version of mattermost
   uri:
     url: "https://api.github.com/repos/mattermost/desktop/releases/latest"
@@ -70,3 +73,4 @@
   apt:
     deb: "https://releases.mattermost.com/desktop/{{ mattermost_latest_release.json.tag_name[1:] }}/mattermost-desktop-{{ mattermost_latest_release.json.tag_name[1:] }}-linux-amd64.deb"
   become: true
+  when: ansible_facts.packages['mattermost-desktop'] is not defined
