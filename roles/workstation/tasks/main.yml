@@ -64,6 +64,7 @@
     deb: "https://repo.skype.com/latest/skypeforlinux-64.deb"
   become: true
   when: ansible_facts.packages.skypeforlinux is not defined
+# note: mattermost will not automatically update :(
 - name: get latest version of mattermost
   uri:
     url: "https://api.github.com/repos/mattermost/desktop/releases/latest"
