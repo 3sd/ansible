@@ -6,7 +6,7 @@ Ansible to
 
 Everything you need to configure a workstation for Third Sector Design.
 
-Start off with a basic encrypted Debian (e.g. Stretch) install, log in as the root user and run the following:
+Start off with a basic encrypted Debian (e.g. Stretch) install. Install any necessary hardware specific (e.g. proprietary wireless) drivers. Log in as the root user and run the following:
 
 ```
 # inspired by https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#id16
@@ -18,7 +18,7 @@ sudo apt-get update
 sudo apt-get install ansible
 ```
 
-As long as your host is in the workstations host group, you should be able to configure it with
+As long as your host is in ansible's `[workstations]` host group, you should be able to configure the rest of the workstation with:
 
 ```
 ansible-playbook /etc/ansible/playbooks/workstation.yml -c local
