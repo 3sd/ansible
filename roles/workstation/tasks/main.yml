@@ -1,0 +1,72 @@
+- name: install packages from debian repos
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - git
+      - gnome
+      - htop
+      - hunspell-en-gb
+      - mysql-client
+      - mysql-server
+      - nginx
+      - pass
+      - php
+      - gnupg2
+      - software-properties-common
+      - sudo
+      - taskwarrior
+      - vim
+      - zsh
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
+- name: configure michael user account
+  user:
+    name: michael
+    shell: /bin/zsh
+  become: true
+- name: add apt keys
+  apt_key:
+    url: "{{ item.url }}"
+    id: "{{ item.id}}"
+    state: present
+  with_items:
+    - { url: 'https://download.docker.com/linux/debian/gpg', id: '0EBFCD88'}
+    - { url: 'https://packagecloud.io/AtomEditor/atom/gpgkey', id: 'DE9E3B09'}
+    - { url: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key', id: '68576280'}
+    - { url: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key', id: '68576280'}
+  become: true
+- name: add third party repos
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  with_items:
+    - "deb [arch=amd64] https://download.docker.com/linux/debian {{ansible_distribution_release}} stable"
+    - "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any any main"
+    - "deb https://deb.nodesource.com/node_8.x {{ansible_distribution_release}} main"
+    - "deb https://deb.nodesource.com/node_8.x {{ansible_distribution_release}} main"
+  become: true
+- name: install packages from third party repos
+  apt:
+    name:
+      - atom
+      - docker-ce
+      - docker-compose
+      - nodejs
+    update_cache: true
+  become: true
+- name: install skype
+  apt:
+    deb: "https://repo.skype.com/latest/skypeforlinux-64.deb"
+  become: true
+- name: get latest version of mattermost
+  uri:
+    url: "https://api.github.com/repos/mattermost/desktop/releases/latest"
+    return_content: yes
+  register: mattermost_latest_release
+- name: install mattermost
+  apt:
+    deb: "https://releases.mattermost.com/desktop/{{ mattermost_latest_release.json.tag_name[1:] }}/mattermost-desktop-{{ mattermost_latest_release.json.tag_name[1:] }}-linux-amd64.deb"
+  become: true
