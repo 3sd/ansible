@@ -15,6 +15,7 @@
       - nginx
       - pass
       - php
+      - prometheus-node-exporter
       - gnupg2
       - software-properties-common
       - sudo
