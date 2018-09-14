@@ -41,7 +41,6 @@
     - { url: 'https://download.docker.com/linux/debian/gpg', id: '0EBFCD88'}
     - { url: 'https://packagecloud.io/AtomEditor/atom/gpgkey', id: 'DE9E3B09'}
     - { url: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key', id: '68576280'}
-    - { url: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key', id: '68576280'}
   become: true
 - name: add third party repos
   apt_repository:
@@ -50,7 +49,6 @@
   with_items:
     - "deb [arch=amd64] https://download.docker.com/linux/debian {{ansible_distribution_release}} stable"
     - "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any any main"
-    - "deb https://deb.nodesource.com/node_8.x {{ansible_distribution_release}} main"
     - "deb https://deb.nodesource.com/node_8.x {{ansible_distribution_release}} main"
   become: true
 - name: install packages from third party repos
