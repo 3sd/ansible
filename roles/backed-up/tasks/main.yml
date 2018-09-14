@@ -1,0 +1,16 @@
+- name: git checkout of backup scripts
+  git:
+    repo: https://github.com/michaelmcandrew/backup
+    dest: /usr/local/src/backup
+  become: true
+- name: cron file to create local backups
+  copy:
+    src: cron_backup
+    dest: /etc/cron.d/backup
+  become: true
+- name: default backup pattern
+  copy:
+    src: etc_backup_pattern
+    dest: /etc/backup/pattern
+    force: no 
+  become: true
