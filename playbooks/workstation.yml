@@ -2,3 +2,4 @@
   roles:
     - workstation
     - backed-up
+    - zsh

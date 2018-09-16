@@ -28,7 +28,6 @@
 - name: configure michael user account
   user:
     name: michael
-    shell: /bin/zsh
     append: yes
     groups: docker
   become: true

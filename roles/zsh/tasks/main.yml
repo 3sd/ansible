@@ -1,0 +1,12 @@
+- name: configure michael user account
+  user:
+    name: michael
+    shell: /bin/zsh
+  become: true
+- name: git checkout of zsh config and plugins
+  git:
+    repo: "{{ item }}"
+    dest: /usr/local/src/backup
+  with_items:
+    - https://github.com/3sd/zsh
+    - https://github.com/zsh-users/zsh-autosuggestions
