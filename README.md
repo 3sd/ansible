@@ -10,18 +10,18 @@ Start off with a encrypted install of the latest Debian distribution (with any  
 
 ```
 # inspired by https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#id16
-sudo apt-get install git
-git clone git@github.com:michaelmcandrew/ansible.git /etc/ansible???
+apt-get install git
+git clone https://github.com/3sd/ansible /etc/ansible
 echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" > /etc/apt/sources.list.d/ansible.list
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
-sudo apt-get update
-sudo apt-get install ansible
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+apt-get update
+apt-get install ansible
 ```
 
 As long as your host is in ansible's `[workstation]` host group, you should then be able to configure the rest of the workstation with:
 
 ```
-ansible-playbook /etc/ansible/playbooks/workstation.yml -c local
+ansible-playbook /etc/ansible/playbooks/workstation.yml
 ```
 
 ## Backup
