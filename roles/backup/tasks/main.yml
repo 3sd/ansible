@@ -1,6 +1,6 @@
 - name: git checkout of backup scripts
   git:
-    repo: https://github.com/michaelmcandrew/backup
+    repo: https://github.com/3sd/backup
     dest: /usr/local/src/backup
   become: true
 - name: cron file to create local backups
