@@ -21,11 +21,10 @@
       - sudo
       - taskwarrior
       - vim
-      - zsh
     update_cache: true
     cache_valid_time: 3600
   become: true
-- name: configure michael user account
+- name: add michael to docker group
   user:
     name: michael
     append: yes
@@ -34,7 +33,7 @@
 - name: add apt keys
   apt_key:
     url: "{{ item.url }}"
-    id: "{{ item.id}}"
+    id: "{{ item.id }}"
     state: present
   with_items:
     - { url: 'https://download.docker.com/linux/debian/gpg', id: '0EBFCD88'}

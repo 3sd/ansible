@@ -1,0 +1,2 @@
+PROMPT_COLOUR={{ prompt_color }}
+source ~/.zsh/main.sh

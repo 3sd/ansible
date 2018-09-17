@@ -1,12 +1,22 @@
+- name: install zsh
+  apt:
+    name: zsh
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
 - name: configure michael user account
   user:
     name: michael
     shell: /bin/zsh
   become: true
+- name: zsh config
+  template:
+    src: zshrc
+    dest: "/home/{{ primary_user }}/.zshrc"
 - name: git checkout of zsh config and plugins
   git:
-    repo: "{{ item }}"
-    dest: /usr/local/src/backup
+    repo: "{{ item.url }}"
+    dest: "{{ item.dir }}"
   with_items:
-    - https://github.com/3sd/zsh
-    - https://github.com/zsh-users/zsh-autosuggestions
+    - { url: 'https://github.com/3sd/zsh', dir: '/home/michael/.zsh' }
+    - { url: 'https://github.com/zsh-users/zsh-autosuggestions', dir: "/home/{{ primary_user }}/.zsh_plugins/zsh-autosuggestions" }
