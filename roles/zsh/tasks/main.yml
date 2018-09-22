@@ -18,5 +18,8 @@
     repo: "{{ item.url }}"
     dest: "{{ item.dir }}"
   with_items:
-    - { url: 'https://github.com/3sd/zsh', dir: '/home/michael/.zsh' }
+    - { url: 'git@github.com:3sd/zsh.git', dir: '/home/michael/.zsh' }
     - { url: 'https://github.com/zsh-users/zsh-autosuggestions', dir: "/home/{{ primary_user }}/.zsh_plugins/zsh-autosuggestions" }
+    - { url: 'https://github.com/zsh-users/zsh-history-substring-search', dir: "/home/{{ primary_user }}/.zsh_plugins/zsh-history-substring-search" }
+    - { url: 'https://github.com/zsh-users/zsh-completions', dir: "/home/{{ primary_user }}/.zsh_plugins/zsh-completions" }
+    - { url: 'https://github.com/olivierverdier/zsh-git-prompt', dir: "/home/{{ primary_user }}/.zsh_plugins/zsh-git-prompt" }
