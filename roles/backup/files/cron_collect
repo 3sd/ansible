@@ -1,1 +1,1 @@
-40 */4 * * * root /usr/local/src/backup/collect
+20 */4 * * * root /usr/local/src/backup/collect
