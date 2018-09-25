@@ -20,3 +20,12 @@
         name: "{{ primary_user }}"
         append: yes
         groups: sudo
+    - name: disable password authentication for ssh
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        line: PasswordAuthentication no
+  handlers:
+    - name: restart sshd
+      service:
+        name: sshd
+        state: restarted
