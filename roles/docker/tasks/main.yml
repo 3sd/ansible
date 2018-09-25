@@ -1,0 +1,25 @@
+- name: add apt keys for docker
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    id: 0EBFCD88
+    state: present
+  become: true
+- name: add docker repo
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ansible_distribution_release}} stable"
+    state: present
+  become: true
+- name: install docker packages
+  apt:
+    name:
+      - docker-ce
+      - docker-compose
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
+- name: "add {{ primary_user }} to docker group"
+  user:
+    name: "{{ primary_user }}"
+    append: yes
+    groups: docker
+  become: true
