@@ -8,6 +8,14 @@
     src: cron_backup
     dest: /etc/cron.d/backup
   become: true
+- name: Create required backup directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /etc/backup
+    - /srv/backup/local/now
+  become: true
 - name: default backup pattern
   copy:
     src: etc_backup_pattern
