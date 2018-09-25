@@ -1,0 +1,15 @@
+- name: apt install some essential packages
+  apt:
+    name:
+      - apt-transport-https
+      - git
+      - vim
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
+- name: disable password authentication for ssh
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: PasswordAuthentication no
+  become: true
+  notify: restart sshd

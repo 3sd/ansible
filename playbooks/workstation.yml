@@ -1,5 +1,6 @@
 - hosts: workstation
   roles:
+    - base
     - zsh
     - workstation
     - backed-up
