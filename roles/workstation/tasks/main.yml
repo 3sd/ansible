@@ -18,6 +18,7 @@
       - pass
       - php
       - prometheus-node-exporter
+      - redshift-gtk # not necessary in the gnome3 that ships with the next version of Debian
       - software-properties-common
       - sudo
       - taskwarrior
