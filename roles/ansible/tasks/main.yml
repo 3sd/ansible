@@ -1,1 +1,5 @@
 # Todo (in the mean time, follow instructions in readme)
+- name: add ansible repo
+  apt_repository:
+    repo: "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main"
+  become: true
