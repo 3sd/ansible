@@ -3,24 +3,26 @@
 - name: install packages from debian repos
   apt:
     name:
-      - apt-transport-https
+      - autofs
+      - autojump
       - ca-certificates
+      - chromium
       - curl
-      - git
       - gnome
+      - gnupg2
       - htop
       - hunspell-en-gb
       - mysql-client
       - mysql-server
-      - nginx
+      - nginx # TODO ensure that apache is not enabled on port 80
       - pass
       - php
       - prometheus-node-exporter
-      - gnupg2
       - software-properties-common
       - sudo
       - taskwarrior
-      - vim
+      - timewarrior
+      - thunderbird
     update_cache: true
     cache_valid_time: 3600
   become: true
@@ -47,6 +49,7 @@
       - atom
       - nodejs
     update_cache: true
+    cache_valid_time: 3600
   become: true
 # Principle: don't cater for people that don't follow the rules
 # - name: install skype
