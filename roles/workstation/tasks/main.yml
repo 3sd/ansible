@@ -11,6 +11,7 @@
       - gnupg2
       - htop
       - hunspell-en-gb
+      - info
       - mysql-client
       - mysql-server
       - nginx # TODO ensure that apache is not enabled on port 80
@@ -69,3 +70,10 @@
     deb: "https://releases.mattermost.com/desktop/{{ mattermost_latest_release.json.tag_name[1:] }}/mattermost-desktop-{{ mattermost_latest_release.json.tag_name[1:] }}-linux-amd64.deb"
   become: true
   when: ansible_facts.packages['mattermost-desktop'] is not defined
+- name: skip grub bootmenu
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_TIMEOUT='
+    line: 'GRUB_TIMEOUT=0'
+  become: true
+  notify: update grub
