@@ -34,7 +34,6 @@
     id: "{{ item.id }}"
     state: present
   with_items:
-    - { url: 'https://packagecloud.io/AtomEditor/atom/gpgkey', id: 'DE9E3B09'}
     - { url: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key', id: '68576280'}
   become: true
 - name: add third party repos
@@ -42,24 +41,15 @@
     repo: "{{ item }}"
     state: present
   with_items:
-    - "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any any main"
     - "deb https://deb.nodesource.com/node_8.x {{ansible_distribution_release}} main"
   become: true
 - name: install packages from third party repos
   apt:
     name:
-      - atom
       - nodejs
     update_cache: true
     cache_valid_time: 3600
   become: true
-# Principle: don't cater for people that don't follow the rules
-# - name: install skype
-#   apt:
-#     deb: "https://repo.skype.com/latest/skypeforlinux-64.deb"
-#   become: true
-#   when: ansible_facts.packages.skypeforlinux is not defined
-# note: mattermost will not automatically update :(
 - name: get latest version of mattermost
   uri:
     url: "https://api.github.com/repos/mattermost/desktop/releases/latest"

@@ -1,6 +1,7 @@
 - hosts: workstation
   roles:
     - base
+    - atom
     - ansible
     - backed-up
     - docker
