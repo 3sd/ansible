@@ -1,6 +1,8 @@
 - name: install zsh and other required packages
   apt:
-    name: zsh
+    name:
+      - zsh
+      - autojump
     update_cache: true
     cache_valid_time: 3600
   become: true

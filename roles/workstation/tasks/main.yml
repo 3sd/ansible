@@ -4,7 +4,6 @@
   apt:
     name:
       - autofs
-      - autojump
       - ca-certificates
       - chromium
       - curl
