@@ -6,3 +6,11 @@
     - docker
     - nfs-server
     - zsh
+  tasks:
+    - name: install transmission
+      apt:
+        name:
+          - transmission-daemon
+        update_cache: true
+        cache_valid_time: 3600
+      become: true
