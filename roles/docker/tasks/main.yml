@@ -9,11 +9,11 @@
     repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ansible_distribution_release}} stable"
     state: present
   become: true
-- name: install docker packages
+- name: install docker-ce and pip (for docker-compose)
   apt:
     name:
       - docker-ce
-      - docker-compose
+      - python-pip
     update_cache: true
     cache_valid_time: 3600
   become: true
@@ -23,3 +23,6 @@
     append: yes
     groups: docker
   become: true
+- name: install docker compose (via pip)
+  pip:
+    name: docker-compose
