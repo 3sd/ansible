@@ -1,4 +1,4 @@
-- hosts: larch.3sd.io:oak.3sd.io
+- hosts: oak.3sd.io
   roles:
     - base
     - backed-up
