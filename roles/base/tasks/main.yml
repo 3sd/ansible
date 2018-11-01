@@ -16,3 +16,9 @@
     line: PasswordAuthentication no
   become: true
   notify: restart sshd
+- name: prometheus-node-exporter
+  service:
+    name: sshd
+    state: started
+    enabled: yes
+  become: true
