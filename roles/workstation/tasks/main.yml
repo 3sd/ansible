@@ -7,6 +7,7 @@
       - ca-certificates
       - chromium
       - curl
+      - gitk
       - gnome
       - gnupg2
       - htop
@@ -17,36 +18,67 @@
       - nginx # TODO ensure that apache is not enabled on port 80
       - pass
       - php
+      - php-xml
       - sshfs
       - redshift-gtk # not necessary in the gnome3 that ships with the next version of Debian
       - software-properties-common
       - sudo
       - taskwarrior
+      - tasksh
       - timewarrior
       - thunderbird
+      - calendar-google-provider
+      - vlc
+      - virt-manager
+      - whois
       # - enigmail # cannot be installed via apt (https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=909081 - install it via thunderbird addons for now)
     update_cache: true
     cache_valid_time: 3600
   become: true
-- name: add apt keys
-  apt_key:
-    url: "{{ item.url }}"
-    id: "{{ item.id }}"
-    state: present
-  with_items:
-    - { url: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key', id: '68576280'}
-  become: true
-- name: add third party repos
+- name: add stretch backports
   apt_repository:
-    repo: "{{ item }}"
+    repo: "deb http://ftp.debian.org/debian stretch-backports main"
     state: present
-  with_items:
-    - "deb https://deb.nodesource.com/node_8.x {{ansible_distribution_release}} main"
   become: true
-- name: install packages from third party repos
+- name: install packages from stretch-backports
   apt:
     name:
-      - nodejs
+      - peek
+    default_release: stretch-backports
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
+- name: add node key
+  apt_key:
+    url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+    id: "68576280"
+    state: present
+  become: true
+- name: add node repo
+  apt_repository:
+    repo: "deb https://deb.nodesource.com/node_8.x {{ansible_distribution_release}} main"
+    state: present
+  become: true
+- name: install node
+  apt:
+    name: nodejs
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
+- name: add yarn key
+  apt_key:
+    url: "https://dl.yarnpkg.com/debian/pubkey.gpg"
+    id: "86E50310"
+    state: present
+  become: true
+- name: add yarn repo
+  apt_repository:
+    repo: "deb https://dl.yarnpkg.com/debian/ stable main"
+    state: present
+  become: true
+- name: install yarn
+  apt:
+    name: yarn
     update_cache: true
     cache_valid_time: 3600
   become: true
