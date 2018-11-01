@@ -18,7 +18,7 @@
   notify: restart sshd
 - name: prometheus-node-exporter
   service:
-    name: sshd
+    name: prometheus-node-exporter
     state: started
     enabled: yes
   become: true
