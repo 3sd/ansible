@@ -1,0 +1,7 @@
+- hosts: alder.3sd.io
+  roles:
+    - base
+    - backed-up
+    - docker
+    - zsh
+    - lemp
