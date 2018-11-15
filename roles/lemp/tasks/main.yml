@@ -7,13 +7,36 @@
     purge: yes
     cache_valid_time: 3600
   become: true
-- name: install lemp for civicrm
+- name: install apt packages for civicrm lemp
   apt:
     name:
       - nginx
       - mysql-server
       - mysql-client
-      - php
+      - php-curl
+      - php-mbstring
+      - php-fpm
+      - php-mysql
+      - php-zip
+      - php-xml
+      - zip
+      - unzip
     update_cache: true
     cache_valid_time: 3600
   become: true
+- name: php config for civicrm
+  copy:
+    src: php.ini
+    dest: /etc/php/7.0/fpm/conf.d/civicrm.ini
+    force: no
+  become: true
+  notify: restart php-fpm
+  # need a way of updating composer
+- name: install composer
+  copy:
+    src: composer
+    dest: /usr/local/bin
+    force: no
+    mode: ugo+x
+  become: true
+
