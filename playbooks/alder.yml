@@ -1,3 +1,4 @@
+# Should probably rename this to production hosts
 - hosts: alder.3sd.io
   roles:
     - base
@@ -5,3 +6,9 @@
     - docker
     - zsh
     - lemp
+  tasks:
+  - name: install certbot
+    apt:
+      name: python-certbot-nginx
+      default_release: stretch-backports
+    become: true

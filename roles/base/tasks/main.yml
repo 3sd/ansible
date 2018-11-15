@@ -1,3 +1,9 @@
+- name: add stretch backports repo
+  apt_repository:
+    repo: deb http://ftp.debian.org/debian stretch-backports main
+    state: present
+    update_cache: true
+  become: true
 - name: apt install some essential packages
   apt:
     name:
