@@ -27,3 +27,5 @@
   pip:
     name: docker-compose
     state: latest
+  become: true
+
