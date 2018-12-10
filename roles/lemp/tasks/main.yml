@@ -16,6 +16,7 @@
       - php-curl
       - php-mbstring
       - php-fpm
+      - php-intl
       - php-mysql
       - php-zip
       - php-xml
