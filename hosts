@@ -8,5 +8,5 @@ oak.3sd.io primary_user=michael prompt_color=212
 hazel.3sd.io
 cedar.3sd.io
 
-[backup]
-cedar.3sd.io
+[production-server]
+alder.3sd.io

@@ -1,5 +1,5 @@
 # Should probably rename this to production hosts
-- hosts: alder.3sd.io
+- hosts: production-server
   roles:
     - base
     - backed-up
