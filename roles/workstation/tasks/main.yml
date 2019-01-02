@@ -13,6 +13,7 @@
       - htop
       - hunspell-en-gb
       - info
+      - locate
       - mysql-client
       - mysql-server
       - nginx # TODO ensure that apache is not enabled on port 80
