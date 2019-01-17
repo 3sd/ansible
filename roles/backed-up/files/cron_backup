@@ -1,1 +1,1 @@
-0 */4 * * * root /usr/bin/nice -n 10 /usr/local/src/backup/backup
+0 */4 * * * root /usr/bin/nice -n 19 /usr/local/src/backup/backup
