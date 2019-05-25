@@ -4,7 +4,7 @@ Ansible to manage 3SD infrastructure.
 
 ## Getting started
 
-The following Ansible scripts are designed to be run on freshly installed Debian Buster machines. Select the gnome desktop environment and ssh server during the installation.
+The following Ansible scripts are designed to be run on freshly installed Debian Buster machines which have selected the gnome desktop environment and ssh server during the installation.
 
 ### Bootstraping a control machine
 
