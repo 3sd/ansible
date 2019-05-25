@@ -1,51 +1,20 @@
-- name: get installed packages
-  package_facts:
-- name: install packages from debian repos
+- name: install various packages from debian repos
   apt:
     name:
+      - apache2-utils
       - autofs
-      - ca-certificates
       - chromium
       - curl
       - gitk
-      - gnome
-      - gnupg2
       - htop
-      - hunspell-en-gb
-      - info
-      - locate
-      - mysql-client
-      - mysql-server
-      - nginx # TODO ensure that apache is not enabled on port 80
+      - nginx
       - pass
+      - peek
       - php
-      - php-xml
-      - sshfs
-      - redshift-gtk # not necessary in the gnome3 that ships with the next version of Debian
-      - software-properties-common
-      - sudo
-      - taskwarrior
-      - tasksh
-      - timewarrior
-      - thunderbird
-      - calendar-google-provider
       - vlc
       - virt-manager
+      - webext-browserpass
       - whois
-      # - enigmail # cannot be installed via apt (https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=909081 - install it via thunderbird addons for now)
-    update_cache: true
-    cache_valid_time: 3600
-  become: true
-- name: add stretch backports
-  apt_repository:
-    repo: "deb http://ftp.debian.org/debian stretch-backports main"
-    state: present
-  become: true
-- name: install packages from stretch-backports
-  apt:
-    name:
-      - peek
-    default_release: stretch-backports
     update_cache: true
     cache_valid_time: 3600
   become: true
@@ -57,7 +26,7 @@
   become: true
 - name: add node repo
   apt_repository:
-    repo: "deb https://deb.nodesource.com/node_8.x {{ansible_distribution_release}} main"
+    repo: "deb https://deb.nodesource.com/node_12.x buster main" # hardcode buster for now
     state: present
   become: true
 - name: install node
@@ -66,37 +35,10 @@
     update_cache: true
     cache_valid_time: 3600
   become: true
-- name: add yarn key
-  apt_key:
-    url: "https://dl.yarnpkg.com/debian/pubkey.gpg"
-    id: "86E50310"
-    state: present
-  become: true
-- name: add yarn repo
-  apt_repository:
-    repo: "deb https://dl.yarnpkg.com/debian/ stable main"
-    state: present
-  become: true
-- name: install yarn
-  apt:
-    name: yarn
-    update_cache: true
-    cache_valid_time: 3600
-  become: true
-- name: get latest version of mattermost
-  uri:
-    url: "https://api.github.com/repos/mattermost/desktop/releases/latest"
-    return_content: yes
-  register: mattermost_latest_release
-- name: install mattermost
-  apt:
-    deb: "https://releases.mattermost.com/desktop/{{ mattermost_latest_release.json.tag_name[1:] }}/mattermost-desktop-{{ mattermost_latest_release.json.tag_name[1:] }}-linux-amd64.deb"
-  become: true
-  when: ansible_facts.packages['mattermost-desktop'] is not defined
 - name: skip grub bootmenu
   lineinfile:
     path: /etc/default/grub
-    regexp: '^GRUB_TIMEOUT='
-    line: 'GRUB_TIMEOUT=0'
+    regexp: "^GRUB_TIMEOUT="
+    line: "GRUB_TIMEOUT=0"
   become: true
   notify: update grub
