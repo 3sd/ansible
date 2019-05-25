@@ -1,12 +1,9 @@
-alder.3sd.io primary_user=michael prompt_color=154
-hazel.3sd.io primary_user=michael prompt_color=50
-cedar.3sd.io primary_user=michael prompt_color=220
-larch.3sd.io primary_user=michael prompt_color=208
-oak.3sd.io primary_user=michael prompt_color=212
+alder.3sd.io ansible_user=michael prompt_color=154
+cedar.3sd.io ansible_user=michael prompt_color=50
+oak.3sd.io ansible_user=michael prompt_color=212
 
-[workstation]
-hazel.3sd.io
+[workstations]
 cedar.3sd.io
 
-[production-server]
+[production-servers]
 alder.3sd.io
