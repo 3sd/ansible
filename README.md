@@ -2,13 +2,37 @@
 
 Ansible to manage 3SD infrastructure.
 
-The following Ansible scripts are designed to be run on Debian hosts.
+## Getting started
 
-# Prerequisites
+The following Ansible scripts are designed to be run on freshly installed Debian Buster machines. Select the gnome desktop environment and ssh server during the installation.
+
+### Bootstraping a control machine
+
+If you are starting from scratch, bootstrap a control machine as follows:
+
+As the root user:
+
+```shell
+apt install git
+git clone https://github.com/3sd/ansible
+mv ansible /etc
+apt install ansible
+chown -R /etc/ansible michael:michael # (replace with your user)
+```
+
+### Preparing hosts for ansible
+
+`bootstrap.yml` installs sudo and allows passwordless invocation, which is necessary for ansible (and also useful for the owners of the workstations).
+
+Note that the host will need to be accessible via ssh to run `bootstrap.yml`.
+
+Note that the host should be accessible by ssh (which is the case if you installed the ssh server as part of the Debian installation).
+
+
 
 The host should be accessible via ssh with a key pair.
 
-# Initialisation
+## Initialisation
 
 The following script can be run from a machine with ssh access to the server. Note that it
 
@@ -31,16 +55,6 @@ The ansible scripts in this repo expect passwordless sudo. If you can access the
 
 If you are need to re-create a workstation and don't have access to another worstation to do this via ansible, you can do something like the following:
 
-```
-# inspired by https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#id16
-apt-get install git
-git clone https://github.com/3sd/ansible /etc/ansible
-echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" > /etc/apt/sources.list.d/ansible.list
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
-apt-get update
-apt-get install ansible
-ansible-playbook /etc/ansible/playbooks/bootstrap.yml --ask-become-pass -e host=<HOSTNAME>
-```
 
 You should then be able to configure the rest of the workstation with:
 
