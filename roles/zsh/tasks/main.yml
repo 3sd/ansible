@@ -6,22 +6,42 @@
     update_cache: true
     cache_valid_time: 3600
   become: true
-- name: "set shell for {{ primary_user }} to zsh"
+- name: "set shell for {{ ansible_user }} to zsh"
   user:
-    name: "{{ primary_user }}"
+    name: "{{ ansible_user }}"
     shell: /bin/zsh
   become: true
-- name: zsh config
-  template:
-    src: zshrc
-    dest: "/home/{{ primary_user }}/.zshrc"
 - name: git checkout of zsh config and plugins
   git:
     repo: "{{ item.url }}"
     dest: "{{ item.dir }}"
   with_items:
-    - { url: 'https://github.com/3sd/zsh.git', dir: '/home/michael/.zsh' }
-    - { url: 'https://github.com/zsh-users/zsh-autosuggestions', dir: "/home/{{ primary_user }}/.zsh_plugins/zsh-autosuggestions" }
-    - { url: 'https://github.com/zsh-users/zsh-history-substring-search', dir: "/home/{{ primary_user }}/.zsh_plugins/zsh-history-substring-search" }
-    - { url: 'https://github.com/zsh-users/zsh-completions', dir: "/home/{{ primary_user }}/.zsh_plugins/zsh-completions" }
-    - { url: 'https://github.com/olivierverdier/zsh-git-prompt', dir: "/home/{{ primary_user }}/.zsh_plugins/zsh-git-prompt" }
+    - {
+        url: "https://github.com/3sd/zsh.git",
+        dir: "/home/{{ ansible_user }}/.zsh",
+      }
+    - {
+        url: "https://github.com/zsh-users/zsh-autosuggestions",
+        dir: "/home/{{ ansible_user }}/.zsh/plugins/zsh-autosuggestions",
+      }
+    - {
+        url: "https://github.com/zsh-users/zsh-history-substring-search",
+        dir: "/home/{{ ansible_user }}/.zsh/plugins/zsh-history-substring-search",
+      }
+    - {
+        url: "https://github.com/zsh-users/zsh-completions",
+        dir: "/home/{{ ansible_user }}/.zsh/plugins/zsh-completions",
+      }
+    - {
+        url: "https://github.com/starcraftman/zsh-git-prompt",
+        dir: "/home/{{ ansible_user }}/.zsh/plugins/zsh-git-prompt",
+      }
+- name: symlink to zsh config
+  file:
+    src: "/home/{{ ansible_user }}/.zsh/zshrc"
+    dest: "/home/{{ ansible_user }}/.zshrc"
+    state: link
+- name: copy zsh vars to host
+  template:
+    src: zsh_vars
+    dest: "/home/{{ ansible_user }}/.zsh/vars"
