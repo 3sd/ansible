@@ -1,0 +1,10 @@
+- hosts: workstations
+  roles:
+      - shell
+      - workstation
+      # - base
+      # - atom
+      # - ansible
+      # - backed-up
+      # - docker
+      # - lemp

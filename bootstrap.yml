@@ -1,0 +1,30 @@
+# Allow a host to be managed by ansible
+# Invoke with something like:
+# ansible-playbook /etc/ansible/bootstrap.yml -e host=localhost -e ansible_user=michael --ask-become-pass
+
+# Note: you will have to log out and in again on the remote machine for the add group to take effect
+# (which can be a pain when the remote machine is actually your machine)
+
+- hosts: "{{ host }}"
+  become: true
+  become_method: su
+  tasks:
+    - name: install sudo
+      apt:
+        name: sudo
+        update_cache: yes
+        cache_valid_time: 3600
+    - name: passwordless sudo config
+      copy:
+        src: bootstrap/sudo_passwordless
+        dest: /etc/sudoers.d/passwordless
+    - name: Set authorized key taken from file
+      authorized_key:
+        user: "{{ ansible_user }}"
+        state: present
+        key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    - name: "add {{ ansible_user }} to sudo group"
+      user:
+        name: "{{ ansible_user }}"
+        append: yes
+        groups: sudo
