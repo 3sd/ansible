@@ -7,6 +7,8 @@
       - curl
       - gitk
       - htop
+      - inkscape
+      - ldnsutils
       - nginx
       - pass
       - peek
