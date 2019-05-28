@@ -1,10 +1,10 @@
 - hosts: workstations
   roles:
-        - workstation
-        - zsh
-        #   - base
-        #   - atom
-        #   - ansible
-        #   - backed-up
-        #   - docker
-        #   - lemp
+          - workstation
+          - docker
+          - zsh
+  #   - base
+  #   - atom
+  #   - ansible
+  #   - backed-up
+  #   - lemp
