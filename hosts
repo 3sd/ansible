@@ -1,9 +1,11 @@
 alder.3sd.io ansible_user=michael prompt_color=154
 cedar.3sd.io ansible_user=michael prompt_color=50
+beech.3sd.io ansible_user=rebecca prompt_color=50
 oak.3sd.io ansible_user=michael prompt_color=212
 
 [workstations]
 cedar.3sd.io
+beech.3sd.io
 
 [production-servers]
 alder.3sd.io
