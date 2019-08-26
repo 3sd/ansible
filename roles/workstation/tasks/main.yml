@@ -51,3 +51,9 @@
     line: "GRUB_TIMEOUT=0"
   become: true
   notify: update grub
+- name: increase number of file handlers
+  copy:
+    src: max_user_watches.conf
+    dest: /etc/sysctl.d/max_user_watches.conf
+    force: yes
+  become: true
