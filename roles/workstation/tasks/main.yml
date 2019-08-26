@@ -8,12 +8,18 @@
       - gitk
       - htop
       - inkscape
+      - intel-microcode
       - ldnsutils
+      - mysql-client
       - nginx
       - pass
       - peek
       - php
       - pwgen
+      - rsync
+      - screen
+      - thunderbird
+      - ufw
       - vlc
       - virt-manager
       - webext-browserpass
