@@ -10,7 +10,7 @@
       - inkscape
       - intel-microcode
       - ldnsutils
-      - mysql-client
+      - mariadb-client
       - nginx
       - pass
       - peek
