@@ -1,3 +1,11 @@
+- name: purge apache
+  apt:
+    name:
+      - apache2
+    state: absent
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
 - name: install various packages from debian repos
   apt:
     name:
