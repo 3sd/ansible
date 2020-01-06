@@ -34,8 +34,8 @@ The host should be accessible via ssh with a key pair.
 
 The following script can be run from a machine with ssh access to the server. Note that it
 
-* enables passwordless sudo (necessary for Ansible)
-* disables ssh connects that use passwords (good for security)
+- enables passwordless sudo (necessary for Ansible)
+- disables ssh connects that use passwords (good for security)
 
 ```shell
 ansible-playbook /etc/ansible/playbooks/bootstrap.yml --ask-become-pass -e host=<HOSTNAME>
@@ -70,20 +70,6 @@ All hosts with the backed-up role create local snapshots of selected directories
 Redtimer is a great tool, though appears a little out of date. It relies on libssl1.0-dev libssl1.0.2, which is a dependency of Redtimer
 
 ```yml
-  apt_repository:
-    repo: "deb http://deb.debian.org/debian/ stretch main"
-    state: present
-  become: true
-- name: install libssl1.0-dev libssl1.0.2 as a dependency of redtimer
-  apt:
-    name:
-      - libssl1.0-dev
-      - libssl1.0.2
-    update_cache: true
-    cache_valid_time: 3600
-  become: true
-
-
 - name: add stretch repo for libssl1.0-dev libssl1.0.2, which is a dependency of redtimer
   apt_repository:
     repo: "deb http://deb.debian.org/debian/ stretch main"
