@@ -2,10 +2,10 @@
   apt:
     name:
       - git
-        - htop
-        - vim
-        - prometheus-node-exporter
-        - ldnsutils
+      - htop
+      - vim
+      - prometheus-node-exporter
+      - ldnsutils
     update_cache: true
     cache_valid_time: 3600
   become: true
