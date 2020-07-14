@@ -2,13 +2,5 @@
 - hosts: production-server
   roles:
     - base
-    - backed-up
     - docker
-    - zsh
-    - lemp
-  tasks:
-  - name: install certbot
-    apt:
-      name: python-certbot-nginx
-      default_release: stretch-backports
-    become: true
+    - mysql-client
