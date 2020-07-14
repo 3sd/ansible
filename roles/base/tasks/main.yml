@@ -1,18 +1,11 @@
-- name: add stretch backports repo
-  apt_repository:
-    repo: deb http://ftp.debian.org/debian stretch-backports main
-    state: present
-    update_cache: true
-  become: true
-- name: apt install some essential packages
+- name: apt install some utilities
   apt:
     name:
-      - apt-transport-https
       - git
-      - htop
-      - vim
-      - prometheus-node-exporter
-      - ldnsutils
+        - htop
+        - vim
+        - prometheus-node-exporter
+        - ldnsutils
     update_cache: true
     cache_valid_time: 3600
   become: true
