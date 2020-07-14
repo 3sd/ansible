@@ -1,0 +1,6 @@
+- hosts: gpie
+  roles:
+    - base
+    - docker
+    - mysql-client
+    - php-cli

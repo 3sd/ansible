@@ -9,3 +9,4 @@ beech.3sd.io
 
 [production-servers]
 alder.3sd.io
+gpie ansible_user=admin ansible_host=main.greenparty.ie 
